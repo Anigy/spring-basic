@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+	<!-- 配置bean -->
+	<bean id="helloWorld" class="com.anigy.spring.beans.HelloWorld">
+		<property name="name2" value="Spring"></property>
+	</bean>
+	<!-- <bean id="helloWorld2" class="com.anigy.spring.beans.HelloWorld"> <property 
+		name="name2" value="Spring2"></property> </bean> -->
+
+	<bean id="car" class="com.anigy.spring.beans.Car">
+		<constructor-arg value="Audi" index="0"></constructor-arg>
+		<constructor-arg index="1">
+			<value><![CDATA[<Shanghai>]]></value>
+		</constructor-arg>
+		<constructor-arg value="300000" type="double"></constructor-arg>
+	</bean>
+
+	<bean id="car2" class="com.anigy.spring.beans.Car">
+		<constructor-arg value="Baoma"></constructor-arg>
+		<constructor-arg value="Deguo"></constructor-arg>
+		<constructor-arg type="double">
+			<value>250</value>
+		</constructor-arg>
+	</bean>
+
+	<!-- <bean id="person" class="com.anigy.spring.beans.Person"> <property 
+		name="name" value="Tom"></property> <property name="age" value="24"></property> 
+		<property name="car" ref="car2"></property> <property name="car"> <ref bean="car2"></ref> 
+		<bean class="com.anigy.spring.beans.Car"> <constructor-arg value="Ford"></constructor-arg> 
+		<constructor-arg value="Changan"></constructor-arg> <constructor-arg value="200000" 
+		type="double"></constructor-arg> </bean> </property> </bean> -->
+
+	<bean id="person2" class="com.anigy.spring.beans.Person">
+		<constructor-arg value="Jerry"></constructor-arg>
+		<constructor-arg value="25"></constructor-arg>
+		<constructor-arg ref="car2"></constructor-arg>
+		<property name="car.maxSpeed" value="30000"></property>
+	</bean>
+
+	<bean id="person3"
+		class="com.anigy.spring.beans.collection.Person">
+		<property name="name" value="Mike"></property>
+		<property name="age" value="27"></property>
+		<property name="cars">
+			<list>
+				<ref bean="car"></ref>
+				<ref bean="car2"></ref>
+				<bean class="com.anigy.spring.beans.Car">
+					<constructor-arg value="Ford"></constructor-arg>
+					<constructor-arg value="Changan"></constructor-arg>
+					<constructor-arg value="200000" type="double"></constructor-arg>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dataSource"
+		class="com.anigy.spring.beans.collection.DataSource">
+		<property name="properties">
+			<props>
+				<prop key="user">root</prop>
+				<prop key="password">1234</prop>
+				<prop key="jadbUrl">jdbc:mysql:///test</prop>
+				<prop key="drverClass">com.mysql.jdbc.Driver</prop>
+			</props>
+		</property>
+	</bean>
+
+	<util:list id="cars">
+		<ref bean="car" />
+		<ref bean="car2" />
+		<bean class="com.anigy.spring.beans.Car">
+			<constructor-arg value="Ford"></constructor-arg>
+			<constructor-arg value="Changan"></constructor-arg>
+			<constructor-arg value="200000" type="double"></constructor-arg>
+		</bean>
+	</util:list>
+
+	<bean id="person4"
+		class="com.anigy.spring.beans.collection.Person">
+		<property name="name" value="Jack"></property>
+		<property name="age" value="28"></property>
+		<property name="cars" ref="cars"></property>
+	</bean>
+
+</beans>
